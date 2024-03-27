@@ -135,6 +135,13 @@ user almost-root permissions to start new docker jobs. This scares me a bit.
 So I prefer to use podman. Install it however you're supposed to for your
 system.
 
+### Install Podman on macOS
+
+```
+brew install podman
+podman machine init
+podman machine start
+```
 
 ## Docker (optional)
 
@@ -187,7 +194,26 @@ any model that you want as the evaluator. In my experiments, I had almost identi
 results with the (cheaper) gpt-3.5-turbo, but in a few cases having the more capable
 evaluation model gives more reliable results.
 
-## Set up docker/podman container [highly recommended]
+## Custom models  
+
+If you're hosting a custom model, you'll need to:  
+
+1. Add it to the `config.json` file. Include the `api_key` if applicable, the server `endpoint`, and the Hugging Face model `slug`. For exampl:  
+
+```json
+{
+    "llms": {
+        "Mixtral-8x7B-Instruct-v0.1": {
+            "api_key": "EMPTY",
+            "endpoint": "https://xd3lef1do5g8d0-8080.proxy.runpod.net/v1",
+            "slug": "mistralai/Mixtral-8x7B-Instruct-v0.1"
+        },
+        ...
+}
+```
+
+2. Add the model to LLM class definition in [llm.py](llm.py)  
+3. In [llm.py](llm.py), update the `llm = LLM("openchat/openchat_3.5")` instantiation with your model if you want to set it as the default.    
 
 To start you'll need to create the docker container where the tests will run.
 This will first require that you install docker on your machine.
@@ -219,10 +245,22 @@ Once you've set up your environment, you can run the entire benchmark in just on
 python main.py --model gpt-3.5-turbo --run-tests --generate-report
 ```
 
+Or, for a customer model that follows the OpenAI API:  
+
+```
+python main.py --model openchat_3.5 --run-tests --generate-report
+```
+
 This command will run every single test that's configured on one model.
 It will therefore take some time, and also will cost you a few dollars in
 language model queries. After you can view the full reslt html file in the
 directory `evaluation_examples`.
+
+If the results are not displayed clearly, you can regenerate results:  
+
+```bash
+python generate_report.py
+```
 
 It will also save a cache of this run, so that the next time you can run
 a new model and view the two results side-by-side.
@@ -232,7 +270,11 @@ One is to just directly run test
 
 ```bash
 PYTHONPATH='.' python tests/print_hello.py
-```
+```  
+
+> **Note:** When you run this, the default test llm in llm.py will be the one tested.
+
+
 * Explore the `run_a_simple_testcase.ipynb` notebook to quickly run a sample test case on Colab. 
 
 The other, if you want to save the result of this run so you can load it later,
@@ -244,6 +286,11 @@ is to run the main script and specify which test(s) you want to run.
 python main.py --test print_hello --run-tests --model gpt-3.5-turbo-0125
 ```
 
+Or, for a customer model that follows the OpenAI API:  
+
+```
+python main.py --test print_hello --run-tests --model openchat_3.5 --generate-report
+```
 
 # Modifying the benchmark
 
@@ -319,7 +366,7 @@ with a human-written test, as they are normally asked, before LM refinement.
 Making "gotcha" tests that are designed to show models fail in some way are not useful
 in this setup.
 
-3. Test cases must not download large amounts of data from the internet.
+5. Test cases must not download large amounts of data from the internet.
 Someone else shouldn't have to pay for each run of this benchmark.
 If you need to test a library add it to the Dockerfile.
 

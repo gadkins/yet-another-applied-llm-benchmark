@@ -21,6 +21,7 @@ import json
 import pickle
 import time
 
+from llms.custom_openai_model import CustomOpenAIModel
 from llms.openai_model import OpenAIModel
 from llms.anthropic_model import AnthropicModel
 from llms.mistral_model import MistralModel
@@ -33,12 +34,14 @@ class LLM:
         self.name = name
         if 'gpt' in name:
             self.model = OpenAIModel(name)
+        elif 'openchat_3.5' in name:
+            self.model = CustomOpenAIModel(name)
         # elif 'llama' in name:
         #     self.model = LLAMAModel(name)
         elif 'mistral' in name:
             self.model = MistralModel(name)
-        elif 'gemini' in name or 'bison' in name:
-            self.model = VertexAIModel(name)
+        # elif 'gemini' in name or 'bison' in name:
+        #     self.model = VertexAIModel(name)
         elif 'claude' in name:
             self.model = AnthropicModel(name)
         elif 'moonshot' in name:
@@ -93,9 +96,10 @@ class LLM:
         
         return response
 
+llm = LLM("openchat_3.5", override_hparams={'temperature': 0.1}) 
 #llm = LLM("command")
 #llm = LLM("gpt-3.5-turbo")
-llm = LLM("gpt-4-1106-preview")
+#llm = LLM("gpt-4-1106-preview")
 #llm = LLM("claude-instant-1.2")
 #llm = LLM("mistral-tiny")
 #llm = LLM("gemini-pro", override_hparams={'temperature': 0.3}, use_cache=False)
