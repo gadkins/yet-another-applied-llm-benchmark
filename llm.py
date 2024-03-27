@@ -25,7 +25,7 @@ from llms.custom_openai_model import CustomOpenAIModel
 from llms.openai_model import OpenAIModel
 from llms.anthropic_model import AnthropicModel
 from llms.mistral_model import MistralModel
-from llms.vertexai_model import VertexAIModel
+#from llms.vertexai_model import VertexAIModel
 from llms.cohere_model import CohereModel
 from llms.moonshot_model import MoonshotAIModel
 
