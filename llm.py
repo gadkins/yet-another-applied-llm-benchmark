@@ -34,6 +34,10 @@ class LLM:
         self.name = name
         if 'gpt' in name:
             self.model = OpenAIModel(name)
+        elif 'Mistral-7B-Instruct-v0.1-AWQ' in name:
+            self.model = CustomOpenAIModel(name)
+        elif 'Mixtral-Instruct-AWQ' in name:
+            self.model = CustomOpenAIModel(name)
         elif 'openchat_3.5' in name:
             self.model = CustomOpenAIModel(name)
         # elif 'llama' in name:
