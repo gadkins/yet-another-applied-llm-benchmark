@@ -4,11 +4,23 @@
         "temperature": 0.7
     },
     "llms": {
-        "vertexai": {
-            "project_id": "TODO"
+        "Mistral-7B-Instruct-v0.1-AWQ": {
+            "api_key": "EMPTY",
+            "endpoint": "https://kd4ihnyr1gd956-8000.proxy.runpod.net/v1/",
+            "slug": "TheBloke/Mistral-7B-Instruct-v0.1-AWQ"
+        },
+        "Mixtral-Instruct-AWQ": {
+            "api_key": "EMPTY",
+            "endpoint": "https://mc1s4jnygce5b5-8000.proxy.runpod.net/v1/",
+            "slug": "casperhansen/mixtral-instruct-awq"
+        },
+        "openchat_3.5": {
+            "api_key": "EMPTY",
+            "endpoint": "https://i0vbjq7enev3du-8080.proxy.runpod.net/v1",
+            "model_id": "openchat/openchat_3.5"
         },
         "openai": {
-            "api_key": "TODO"
+            "api_key": "YOUR_OPENAI_API_KEY"
         },
         "mistral": {
             "api_key": "TODO"
@@ -21,6 +33,6 @@
         },
         "moonshot": {
             "api_key": "TODO"
-        }        
+        }
     }
 }
