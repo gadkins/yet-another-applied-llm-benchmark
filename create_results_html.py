@@ -246,7 +246,7 @@ function hiderows() {
     html_content += "<tr><th>Question</th>" + "".join([f"<th>{key}<br/>({int(score_table.mean(1)[all_models.index(key)]*100)}%)</th>" for key in sorted_transposed_rows]) + "</tr>"
 
     if not os.path.exists("evaluation_examples"):
-        os.mkdir("evaluation_examples")
+        os.mkdir("")
     
     # Adding transposed sorted rows (originally keys from inner dictionaries, now columns)
     for idx,column_key in enumerate(sorted_transposed_columns):

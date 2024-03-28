@@ -1,1 +1,5 @@
 .API_KEY
+__pycache__/
+llms/__pycache__/
+tests/__pycache__/
+eval_env/

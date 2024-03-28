@@ -15,7 +15,7 @@ class CustomOpenAIModel:
         print(f"Model name: {self.name}")
         config = json.load(open("config.json"))
         print(f"Model ID: {config['llms'][self.name].get('model_id')}")
-        print(f"API Endpoint: {config['llms'][self.name].get('endpoint')}")
+        print(f"API Endpoint: {config['llms'][self.name].get('endpoint')}\n")
         self.client = OpenAI(
             api_key="EMPTY", # Assumes it does not require API key
             base_url=config['llms'][self.name].get('endpoint')

@@ -101,10 +101,10 @@ class LLM:
         return response
 
 #llm = LLM("Mistral-7B-Instruct-v0.1-AWQ", override_hparams={'temperature': 0.1}) 
-llm = LLM("Mixtral-Instruct-AWQ", override_hparams={'temperature': 0.1}) 
+#llm = LLM("Mixtral-Instruct-AWQ", override_hparams={'temperature': 0.1}) 
 #llm = LLM("openchat_3.5", override_hparams={'temperature': 0.1}) 
 #llm = LLM("command")
-#llm = LLM("gpt-3.5-turbo")
+llm = LLM("gpt-3.5-turbo")
 #llm = LLM("gpt-4-1106-preview")
 #llm = LLM("claude-instant-1.2")
 #llm = LLM("mistral-tiny")
