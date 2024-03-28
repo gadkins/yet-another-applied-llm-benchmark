@@ -198,15 +198,15 @@ evaluation model gives more reliable results.
 
 If you're hosting a custom model, you'll need to:  
 
-1. Add it to the `config.json` file. Include the `api_key` if applicable, the server `endpoint`, and the Hugging Face model `slug`. For exampl:  
+1. Add it to the `config.json` file. Include the `api_key` if applicable, the server `endpoint`, and the Hugging Face model `model_id`. For example:  
 
 ```json
 {
     "llms": {
         "Mixtral-8x7B-Instruct-v0.1": {
-            "api_key": "EMPTY",
+            "api_key": "NONE",
             "endpoint": "https://xd3lef1do5g8d0-8080.proxy.runpod.net/v1",
-            "slug": "mistralai/Mixtral-8x7B-Instruct-v0.1"
+            "model_id": "mistralai/Mixtral-8x7B-Instruct-v0.1"
         },
         ...
 }
@@ -245,7 +245,7 @@ Once you've set up your environment, you can run the entire benchmark in just on
 python main.py --model gpt-3.5-turbo --run-tests --generate-report
 ```
 
-Or, for a customer model that follows the OpenAI API:  
+Or, for a custom model that follows the OpenAI API:  
 
 ```
 python main.py --model openchat_3.5 --run-tests --generate-report
